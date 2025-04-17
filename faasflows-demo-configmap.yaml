@@ -1,0 +1,70 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: flows-config
+  namespace: openfaas
+data:
+  config.json: |
+    {
+      "flows": {
+        "last-ride": {
+          "args": [
+            "user_id"
+          ],
+          "caching": false,
+          "cache_ttl": 0
+        },
+        "user-info": {
+          "args": [
+            "user_id"
+          ],
+          "caching": false,
+          "cache_ttl": 0
+        },
+        "ride-recommend": {
+          "args": [
+            "user_id",
+            "origin"
+          ],
+          "children": {
+            "last_ride_of_passenger": {
+              "args_map": {
+                "user_id": "user_id"
+              },
+              "function": "last-ride"
+            },
+            "user_info_of_passenger": {
+              "args_map": {
+                "user_id": "user_id"
+              },
+              "function": "user-info"
+            }
+          },
+          "caching": false,
+          "cache_ttl": 0
+        },
+        "homepage": {
+          "args": [
+            "user_id",
+            "origin"
+          ],
+          "children": {
+            "ride_recommendation": {
+              "args_map": {
+                "user_id": "user_id",
+                "origin": "origin"
+              },
+              "function": "ride-recommend"
+            },
+            "user_info_of_passenger": {
+              "args_map": {
+                "user_id": "user_id"
+              },
+              "function": "user-info"
+            }
+          },
+          "caching": false,
+          "cache_ttl": 0
+        }
+      }
+    }
