@@ -21,6 +21,36 @@ data:
           "caching": false,
           "cache_ttl": 0
         },
+        "ride-history": {
+          "args": [
+            "user_id"
+          ],
+          "children": {
+            "last_ride_of_passenger": {
+              "args_map": {
+                "user_id": "user_id"
+              },
+              "function": "last-ride"
+            }
+          },
+          "caching": false,
+          "cache_ttl": 0
+        },
+        "friends": {
+          "args": [
+            "user_id"
+          ],
+          "children": {
+            "user_info_of_passenger": {
+              "args_map": {
+                "user_id": "user_id"
+              },
+              "function": "user-info"
+            }
+          },
+          "caching": false,
+          "cache_ttl": 0
+        },
         "ride-recommend": {
           "args": [
             "user_id",

@@ -1,0 +1,17 @@
+provider:
+  name: faas-netes
+
+# Sesuaikan dengan nama image yang digunakan
+faasnetes:
+  image: danenherdi/faas-netes:faasflows-config-update
+  enabled: true
+  imagePullPolicy: Always
+
+# Sesuaikan dengan nama image yang digunakan
+gateway:
+  image: danenherdi/gateway:faasflows-0.2
+  faasnetes:
+    enabled: false
+
+functionNamespace: openfaas-fn
+basic_auth: false
