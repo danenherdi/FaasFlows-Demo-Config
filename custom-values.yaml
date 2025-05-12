@@ -1,13 +1,13 @@
 provider:
   name: faas-netes
 
-# Sesuaikan dengan nama image yang digunakan
+# Adjust the image name to match the one you are using
 faasnetes:
   image: danenherdi/faas-netes:faasflows-config-update
   enabled: true
   imagePullPolicy: Always
 
-# Sesuaikan dengan nama image yang digunakan
+# Adjust the image name to match the one you are using
 gateway:
   image: danenherdi/gateway:faasflows-0.2
   faasnetes:
